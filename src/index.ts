@@ -4,12 +4,14 @@ import {generateYears} from "./helpers/yearGeneratorHelper";
 const movieList = document.getElementById("movieList") as HTMLDivElement;
 const searchMovieElement = document.getElementById("searchMovie") as HTMLButtonElement;
 const yearSelect = document.getElementById("movieYears") as HTMLSelectElement;
+const errorList = document.getElementById("errorList") as HTMLDivElement;
 
 generateYears(1960, yearSelect, 2025);
 
 searchMovieElement.addEventListener("click", async () => {
 
     movieList.innerHTML = "";
+    errorList.innerHTML = "";
 
     const movieNameElement = document.getElementById("movieName") as HTMLInputElement;
 
@@ -27,7 +29,6 @@ searchMovieElement.addEventListener("click", async () => {
         const errorMessage = document.createElement("h2") as HTMLHeadingElement;
         errorMessage.textContent = response.data.Error+" Here are some recommendations that are similar to what you were search: ";
 
-        const errorList = document.getElementById("errors") as HTMLDivElement;
         errorList.append(errorMessage);
 
         response = await callOMDBApi([
