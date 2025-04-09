@@ -1,5 +1,9 @@
 import {callOMDBApi} from "./services/omdbApiService";
 import {generateYears} from "./helpers/yearGeneratorHelper";
+import {listMovieResults} from "./helpers/movieElementHelper";
+import {ApiResponseErrorInterface} from "./interfaces/ApiResponseErrorInterface";
+import {ApiSuccessInterface} from "./interfaces/ApiSuccessInterface";
+import {SingleMovieInterface} from "./interfaces/SingleMovieInterface";
 
 const movieList = document.getElementById("movieList") as HTMLDivElement;
 const searchMovieElement = document.getElementById("searchMovie") as HTMLButtonElement;
@@ -26,8 +30,11 @@ searchMovieElement.addEventListener("click", async () => {
     ]);
 
     if(response.data.Response === 'False') {
+
+        const errorData = response.data as ApiResponseErrorInterface;
+
         const errorMessage = document.createElement("h2") as HTMLHeadingElement;
-        errorMessage.textContent = response.data.Error+" Here are some recommendations that are similar to what you were search: ";
+        errorMessage.textContent = errorData.Error+" Here are some recommendations that are similar to what you were search: ";
 
         errorList.append(errorMessage);
 
@@ -36,23 +43,7 @@ searchMovieElement.addEventListener("click", async () => {
         ]);
     }
 
-    listMovieResults(response.data.Search, movieList);
+    const successData = response.data as ApiSuccessInterface;
+    listMovieResults(successData.Search, movieList);
 
 });
-
-function listMovieResults(movies: [], htmlMovieList: HTMLElement) {
-    movies.forEach(movie => {
-
-        const movieTitle = document.createElement("h2") as HTMLHeadingElement;
-        movieTitle.textContent = movie.Title;
-
-        const moviePoster = document.createElement("img") as HTMLImageElement;
-        moviePoster.src = movie.Poster;
-
-        const movieHolder = document.createElement("div") as HTMLDivElement;
-        movieHolder.append(movieTitle, moviePoster);
-
-        htmlMovieList.append(movieHolder);
-
-    })
-}
