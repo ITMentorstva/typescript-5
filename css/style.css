@@ -1,0 +1,14 @@
+
+#movieList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#movieList div {
+    max-width: 200px;
+    margin: 10px;
+}
+
+#movieList div img {
+    max-width: 100%;
+}
