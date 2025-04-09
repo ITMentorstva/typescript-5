@@ -1,3 +1,4 @@
+import {SingleMovieInterface} from "../interfaces/SingleMovieInterface";
 
 export function listMovieResults(movies: SingleMovieInterface[], htmlMovieList: HTMLElement) {
     movies.forEach(movie => {
