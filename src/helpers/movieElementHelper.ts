@@ -1,6 +1,9 @@
 import {SingleMovieInterface} from "../interfaces/SingleMovieInterface";
 
-export function listMovieResults(movies: SingleMovieInterface[], htmlMovieList: HTMLElement) {
+export function listMovieResults(movies: SingleMovieInterface[], htmlMovieList: HTMLElement): void {
+
+    htmlMovieList.innerHTML = "";
+
     movies.forEach(movie => {
 
         const movieTitle = document.createElement("h2") as HTMLHeadingElement;

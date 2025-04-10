@@ -12,3 +12,22 @@
 #movieList div img {
     max-width: 100%;
 }
+
+#existingMovies {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#existingMovies div {
+    padding: 10px;
+    background-color: #151313;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+#existingMovies div:hover {
+    background-color: #464545;
+}
